@@ -102,9 +102,9 @@ var playLuckQn = function(e) {
 
 }
 
-generateNewMap()
-playFactQn();
-luckOne();
+// generateNewMap()
+// playFactQn();
+// luckOne();
 
 
 // var playFactQnInOrder = function() {

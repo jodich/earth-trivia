@@ -47,11 +47,13 @@ var lose = function(answer) {
 	}
 }
 
+var startGame 
 
-
-function luckOne(a) {
+function luckOne(name) {
 
 	hideFactQns()
+
+	title.innerHTML = name + ' on a mission to save the earth';
 
 	var randomNum = Math.floor(Math.random() * 3) + 1;					  //questionLuck[0].variable
 	luckQns.textContent = 'Let\'s match. Choose a number from 1 to 3.';   //questionLuck[0].question
