@@ -33,7 +33,13 @@ function generateNewMap() {
 	}
 
 	for (var i = 0; i < remain; i++) {
-		colorArr.push("#999")
+
+		//push random GREEN color
+		var greenColorArr = ['#24436C', '#90AD56', '#607D37', '#375A28', '#90AD56', '#607D37', '#375A28'];
+
+		var randomColorIndex = Math.floor(Math.random() * greenColorArr.length);
+
+		colorArr.push(greenColorArr[randomColorIndex])
 	}
 
 

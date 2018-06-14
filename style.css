@@ -8,9 +8,13 @@ body {
 	font-family: 'Karla', sans-serif;
 }
 
+div {
+    cursor:default;
+}
+
 #instructions {
 	position: absolute;
-	top: 170px;
+	top: 160px;
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
@@ -18,41 +22,54 @@ body {
 	text-align: center;
 }
 
-#intro {
-	width: 70%;
-	margin: 0px auto;
-}
-
-.quote {
-	margin: 0px auto;
-	text-align: left;
-	width: 530px;
-	color: red;
-	font-size: 30px;
-}
-
-.instruct {
-	margin: 40px auto 40px auto;
-	text-align: left;
-	color: green;
-	width: 530px;
-}
-
-input[type=name] {
-	    width: 200px;
-	    position: relative;
-	    top: 0px;
-	    padding: 12px 20px;
-	    margin: 0 auto;
-	    text-align: center;
-	    border: none;
-	    border-bottom: 2px solid red;
-	    background-color: rgba(0, 0, 0, 0);
-	    
-	    font-family: 'Inconsolata', monospace;
-		font-size: 20px;
-		color: red;
+	#intro {
+		width: 70%;
+		margin: 0px auto;
 	}
+
+			.quote {
+				margin: 0px auto;
+				text-align: left;
+				width: 530px;
+				color: red;
+				font-size: 30px;
+			}
+
+			.by-who {
+				margin: 5px auto;
+				text-align: right;
+				padding-right: 10px;
+				width: 530px;
+				color: red;
+				font-size: 20px;
+			}
+
+			.instruct {
+				margin: 30px auto 40px auto;
+				padding: 0 0 0 0px;
+				text-align: left;
+				color: #607D37;
+				width: 530px;
+				font-size: 16px;
+				line-height: 22px;
+				/*letter-spacing: 0.01em;*/
+			}
+
+			input[type=name] {
+				    width: 270px;
+				    position: relative;
+				    top: 0px;
+				    padding: 12px 20px;
+				    margin: 0 auto;
+				    text-align: center;
+				    border: none;
+				    border: 2px solid red;
+				    background-color: rgba(0, 0, 0, 0);
+				    
+				    font-family: 'Inconsolata', monospace;
+					font-size: 20px;
+					color: red;
+				}
 
 
 #map {
@@ -68,7 +85,7 @@ canvas {
 }
 
 .game-info {
-	margin: 30px auto;
+	margin: 50px auto;
 	width: 760px;
 	text-align: center;
 	height: 30px;
@@ -166,7 +183,7 @@ canvas {
 				    margin: 0 auto;
 				    text-align: center;
 				    border: none;
-				    border-bottom: 2px solid red;
+				    border: 2px solid red;
 				    background-color: rgba(0, 0, 0, 0);
 				    
 				    font-family: 'Inconsolata', monospace;

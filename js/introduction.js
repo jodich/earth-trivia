@@ -11,23 +11,23 @@ var gameStats = document.querySelector('.game-info');
 
 var intro = document.querySelector('.intro');
 	var quote = document.querySelector('.quote');
+	var byWho = document.querySelector('.by-who');
 	var instruct = document.querySelector('.instruct');
 var nameQn = document.querySelector('#name');
 var nameInput = document.querySelector('#name-form');
 
 
-
+// remove items from display
 canvas.setAttribute("style", "display: none");
 text.setAttribute("style", "display: none");
 gameStats.setAttribute("style", "display: none");
 
-
-
-// open intro page
-quote.innerHTML = 'Ignorance is the bane of our existance<br>- Adipo Sidang';
-instruct.innerHTML = 'Each time a question is answered wrongly, the affected area on Earth will increase. These affected areas are represented by <b>red</b> dots. The increment of the red dots represents the danger you are placing in Earth in each time you are ignorant about matters concerning the environment.<br><br>\
-Can you complete the questionnaire without polluting Earth with your ignorance?' 
-nameQn.textContent = 'What is your name?'
+// set up items for intro page
+quote.innerHTML = 'Ignorance is the bane of our existence';
+byWho.innerHTML = '- Adipo Sidang';
+instruct.innerHTML = 'For each question answered wrongly, the ‘Affected Area’, represented by the red dots, increases. As the red dots increases, it mirrors the danger you are placing Earth in each time you are ignorant about matters concerning the environment.\
+<br><br>Can you complete the trivia without fully polluting the Earth with red dots due to your ignorance?' ;
+nameQn.textContent = 'What is your name?';
 
 // introPage.setAttribute("style", "display: none");
 // canvas.removeAttribute("style", "display: none");
@@ -39,14 +39,15 @@ var name;
 nameInput.addEventListener('keypress', function (event) {
 	if (event.which === 13) {
 
-		name = nameInput.value
+		name = nameInput.value.charAt(0).toUpperCase() + nameInput.value.slice(1);
 
 		if (name === ''){
-			name = 'You are'
+			name = 'You are';
+		} else if (name.length > 20) {
+			name = name[0] + name[1] + name[2] + name[3] + name[4] + name[5] + name[6] + name[7] + ' is';
 		} else {
-			name = name + ' is'
+			name = name + ' is';
 		}
-		console.log(name);
 
 		introPage.setAttribute("style", "display: none");
 		canvas.removeAttribute("style", "display: none");
@@ -57,8 +58,7 @@ nameInput.addEventListener('keypress', function (event) {
 			// input all game stats
 			// generate map
 			// generate set of questions
-			
-		generateNewMap();
-		luckOne(name);
+
+		startGame(name);
 	}
 })

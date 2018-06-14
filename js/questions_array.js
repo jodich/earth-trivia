@@ -188,7 +188,7 @@ var questions = [
 		"Carbon Dioxide and Methane",
 		""
 	],
-	answer: "Water and Ozone"
+	answer: "Carbon Dioxide and Methane"
 },
 {
 	question: "Which of the following lightbulb types uses the least energy, and therefore results in fewer greenhouse gas emissions?",
@@ -202,36 +202,91 @@ var questions = [
 }
 ]
 
-var luckQuestion = [
-
-{
-	question: "Let's match! Choose a number from 1 to 3",
-},
 
 
+var l1 = function() {
+	var randomNum = Math.floor(Math.random() * 3) + 1;
+	luckQns.textContent = 'Let\'s match. Choose a number from 1 to 3.';
+
+	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
+	var inputForm = document.querySelector('#form');
+
+	var inputClone = inputForm.cloneNode(true);
+	
+	document.querySelector('.input-form').removeChild(inputForm)
+
+	document.querySelector('.input-form').appendChild(inputClone)
+	// console.log(inputForm)
+	// console.log(inputClone)
+	
+	inputClone.addEventListener('keypress', lucky = function(event) {
+		if (event.which === 13) {
+		
+		var num = inputClone.value;
+		num = parseInt(num);
+			
+			if (randomNum === num) {
+				win();
+			} else {
+				lose(randomNum);
+			}
+
+		}
+	});
+
+	inputClone.addEventListener('blur', function() {
+		inputClone.value = ''
+	});
+}
+
+var l2 = function() {
+	var randomNum = Math.floor(Math.random() * 4) + 1;
+	luckQns.textContent = 'Let\'s match. Choose a number from 1 to 4.';
+
+	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
+	var inputForm = document.querySelector('#form');
+
+	var inputClone = inputForm.cloneNode(true);
+	document.querySelector('.input-form').removeChild(inputForm)
+
+	document.querySelector('.input-form').appendChild(inputClone)
+
+	// console.log(inputForm)
+	// console.log(inputClone)
+	
+	inputClone.addEventListener('keypress', lucky = function(event) {
+		if (event.which === 13) {
+		
+		var num = inputClone.value;
+		num = parseInt(num);
+			
+			if (randomNum === num) {
+				win();
+			} else {
+				lose(randomNum);
+			}
+
+		}
+	});
+
+	inputClone.addEventListener('blur', function() {
+		inputClone.value = ''
+	});
+}
+
+
+var luckQuestions = [];
+
+for (var i = 1; i < 3; i++) {
+	luckQuestionNum = 'l' + i;
+	luckQuestions.push(eval(luckQuestionNum));
+}
 
 
 
 
 
-]
 
 
 // console.log(questions.length)
-
-
-
-
-// function Question (question, choices, answer) {
-// 	this.question = question;
-// 	this.choices = choices;
-// 	this.answer = answer
-// }
-
-// var q1 = new Question("2 plus 2", ["1", "2", "3", "4"], "4")
-// questions.push(q1);
-
-// var q2 = new Question("3 plus 2", ["2", "3", "4", "5"], "5")
-// questions.push(q2);
-
-// console.log(questions[1])
+// console.log(luckQuestions.length)
