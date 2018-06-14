@@ -191,7 +191,7 @@ var questions = [
 	answer: "Carbon Dioxide and Methane"
 },
 {
-	question: "Which of the following lightbulb types uses the least energy, and therefore results in fewer greenhouse gas emissions?",
+	question: "Which of the following lightbulb types uses the least energy, and thus fewer greenhouse gas emissions?",
 	choices: [
 		"Incandescent",
 		"Compact flourescent",
@@ -212,10 +212,11 @@ var l1 = function() {
 	var inputForm = document.querySelector('#form');
 
 	var inputClone = inputForm.cloneNode(true);
-	
+
 	document.querySelector('.input-form').removeChild(inputForm)
 
 	document.querySelector('.input-form').appendChild(inputClone)
+	inputClone.focus()
 	// console.log(inputForm)
 	// console.log(inputClone)
 	
@@ -250,6 +251,7 @@ var l2 = function() {
 	document.querySelector('.input-form').removeChild(inputForm)
 
 	document.querySelector('.input-form').appendChild(inputClone)
+	inputClone.focus()
 
 	// console.log(inputForm)
 	// console.log(inputClone)

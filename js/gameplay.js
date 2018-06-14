@@ -58,8 +58,6 @@ var generateQnsLoop = function() {
 
 	earthMood();
 
-		document.querySelector('#form').autofocus = true;
-
 	count++
 	
 	if (count % 5 === 0) {

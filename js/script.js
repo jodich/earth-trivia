@@ -148,22 +148,19 @@ var factQn = function(e) {
 var luckQn = function() {
 
 	hideFactQns()
-	document.querySelector('#form').autofocus = true;
 
-	l1();
+	pickQnRandomIndex = Math.floor(Math.random() * luckQuestions.length);
 
-	// pickQnRandomIndex = Math.floor(Math.random() * luckQuestions.length);
+	luckQuestions[pickQnRandomIndex]();		// EXECUTES THE FUNCTION
 
-	// luckQuestions[pickQnRandomIndex]();		// EXECUTES THE FUNCTION
+	luckQuestions.splice(pickQnRandomIndex, 1);
 
-	// luckQuestions.splice(pickQnRandomIndex, 1);
-
-	// if (luckQuestions.length === 0) {
-	// 	for (var i = 1; i < 3; i++) {      // NEED TO UPDATE THIS WITH NEW LENGTH OF LUCK QNS
-	// 		luckQuestionNum = 'l' + i;
-	// 		luckQuestions.push(eval(luckQuestionNum));
-	// 	}
-	// }
+	if (luckQuestions.length === 0) {
+		for (var i = 1; i < 3; i++) {      // NEED TO UPDATE THIS WITH NEW LENGTH OF LUCK QNS
+			luckQuestionNum = 'l' + i;
+			luckQuestions.push(eval(luckQuestionNum));
+		}
+	}
 }
 
 
