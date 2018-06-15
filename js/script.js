@@ -1,3 +1,23 @@
+var setAffectedCountColor = function () {
+	document.querySelector('#affectedCount').style.color = "#24439E";
+}
+
+var setEarthMoodColor = function () {
+	// if ever want to assign color to individual mood, etc;
+	if (document.querySelector('#earthMood')) {
+
+		document.querySelector('#earthMood').style.color = "#24439E";
+
+	} else if (document.querySelector('#earthMoodSerious')) {
+
+		document.querySelector('#earthMoodSerious').style.color = "#24439E";
+
+	} else if (document.querySelector('#earthMoodVerySerious')) {
+
+		document.querySelector('#earthMoodVerySerious').style.color = "#24439E";
+	}
+}
+
 var hidebonusQns = function() {
 
 	bonusBox.setAttribute("style", "display: none");
@@ -13,23 +33,24 @@ var hideFactQns = function() {
 var earthMood = function() {
 
 	if (affected === 1175) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Crushed';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodVerySerious">Crushed</span>';
 	} else if (affected >= 950) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Devastated';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodVerySerious">Devastated</span>';
 	} else if (affected >= 800) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Gloomy';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Upset</span>';
 	} else if (affected >= 550) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Distressed';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Distressed</span>';
 	} else if (affected >= 300) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Pessimistic';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Pessimistic</span>';
 	} else if (affected >= 100) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Anxious';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Anxious</span>';
 	} else if (affected >= 0) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Hopeful' ;
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Hopeful</span>';
 	} else {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> WTF';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">WTF</span>';
 	}
 
+	setEarthMoodColor();
 }
 
 
@@ -50,16 +71,39 @@ var cloneInputTag = function(inputClone){
 
 
 
-var win = function() {
+var win = function(a) {
 	console.log('right')
-	affectedCount.innerHTML = 'Affected Area:<br>' + affected + ' / 1175';
-	generateQnsLoop(); // need to change this
+
+	if (affected === 0) {
+		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+		generateQnsLoop();
+		return a
+	}
+
+	c.clearRect(0, 0, 800, 430);
+
+	// generate random count for affected
+	var randomAffected = Math.floor((Math.random() * 50));		// range: 0 to 50
+	affected -= randomAffected;
+
+	if (affected > 0) {
+		generateNewMap();
+		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+		generateQnsLoop();
+	} else if (affected < 0) {
+		affected = 0;
+		generateNewMap();
+		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+		generateQnsLoop();
+	}
 }
 
 
 
 
 var lose = function(answer) {
+	
+	showPopup(answer);
 
 	console.log('The correct answer is ' + answer);
 
@@ -73,8 +117,8 @@ var lose = function(answer) {
 	// default; continues the qns
 	if (affected < 1175) {
 		generateNewMap();
-		affectedCount.innerHTML = 'Affected Area:<br>' + affected + ' / 1175';
-		generateQnsLoop();   // need to change this
+		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+		generateQnsLoop();
 
 
 	// when lose liao, ends the qns
@@ -83,8 +127,9 @@ var lose = function(answer) {
 		affected = 1175;
 		generateNewMap();
 		earthMood();
-		affectedCount.innerHTML = 'Affected Area:<br>' + affected + ' / 1175';
-		
+		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+		setAffectedCountColor();
+
 		setTimeout(function() { alert("LOSER"); }, 500)
 
 		// remove all the eventlisteners when game over
@@ -165,7 +210,7 @@ var bonusQuestionsClone = bonusQuestions;
 var bonusQn = function() {
 
 	hideFactQns();
-	// bonusQuestionsClone[3]();
+	// bonusQuestionsClone[2]();
 
 	// duplicate bonusQuestions array
 	// empty bonusQuestionsClone arr
@@ -187,6 +232,39 @@ var bonusQn = function() {
 	};
 
 };
+
+
+
+
+var popUp = function() {
+	// pop up is to indicate when wrong
+	// runs when player 'lose'
+	// displays popup div
+	// the correct answer is ______
+	// press enter so that popup's display is none
+	// and continues with next question
+}
+
+
+
+var popUpEndGame = function(status) {
+	// pop up is to indicate during end game
+	// runs when no more questions or the map is full of reds
+	// textContent the status; Winner or Loser
+	// press Enter to reload page and hence reset game
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

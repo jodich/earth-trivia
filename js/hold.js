@@ -214,3 +214,54 @@ input[type=text] {
 			padding-bottom: 0px;
 			top: -25px;
 			line-height: 35px;
+
+
+
+
+
+
+
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 3 seconds!<br>\"S U S T A I N A B I L I T Y\"';
+	var checkWord = "sustainability"
+
+	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
+	var inputForm = document.querySelector('#form');
+	var inputForm = inputForm.cloneNode(true);
+
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
+	inputClone.style.width = "250px"
+
+	// set timer; 10 seconds
+	// upon reaching timer, the 'lose' function will play
+	// if enter then check if word is same
+		// if word not the same then 'lose' function
+
+	var funct = function() {lose(checkWord)};
+
+	inputClone.addEventListener('click', function() {
+		var threeSecTimeout = setTimeout(funct, 3000)
+
+		inputClone.addEventListener('keypress', bonusy = function(event) {
+			if (event.which === 13) {
+
+			clearTimeout(threeSecTimeout);
+			
+			var val = inputClone.value.toLowerCase();
+			console.log('the value input is ' + val); // just to check
+
+				if (checkWord === val) {
+					inputClone.removeEventListener('keypress', bonusy);
+					win();
+				} else {
+					inputClone.removeEventListener('keypress', bonusy);
+					lose(checkWord);
+				}
+			}
+		});
+	})
+
+	inputClone.addEventListener('blur', function() {
+		inputClone.value = ''
+	});
+}

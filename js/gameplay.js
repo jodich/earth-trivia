@@ -33,8 +33,9 @@ var startGame = function(name) {
 
 	// design for countScore
 	affectedCount.style.fontSize = "13px";
-	affectedCount.style.lineHeight= "20px";
-	affectedCount.innerHTML = 'Affected Area:<br>' + affected + ' / 1175';
+	affectedCount.style.lineHeight= "18px";
+	affectedCount.style.fontWeight = "900";
+	affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 
 	// title
 	title.style.fontSize = "14px";
@@ -43,8 +44,9 @@ var startGame = function(name) {
 
 	// status
 	earthStats.style.fontSize = "13px";
-	earthStats.style.lineHeight= "20px";
-	earthStats.innerHTML = 'Earth\'s Mood:<br> Sad';
+	earthStats.style.lineHeight= "18px";
+	earthStats.style.fontWeight = "900";
+	earthStats.innerHTML = 'Earth\'s Mood :<br> Sad';
 
 	// GENERATE map
 	generateNewMap();
@@ -57,6 +59,7 @@ var startGame = function(name) {
 var generateQnsLoop = function() {
 
 	earthMood();
+	setAffectedCountColor();
 
 	count++
 	
@@ -68,8 +71,6 @@ var generateQnsLoop = function() {
 		for (var i = 0; i < allChoices.length; i++) {
 			allChoices[i].removeEventListener('click', checkIfCorrect)
 		};
-
-		document.querySelector('#form').removeEventListener('keypress', bonusy);
 
 		setTimeout(function() { alert("WINNER"); }, 500);
 

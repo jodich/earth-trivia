@@ -61,4 +61,4 @@ nameInput.addEventListener('keypress', function (event) {
 
 		startGame(name);
 	}
-})
+});

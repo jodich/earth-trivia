@@ -204,7 +204,6 @@ var questions = [
 
 // 
 
-
 var bonusQuestions = [
 
 function l1() {
@@ -220,22 +219,34 @@ function l1() {
 	inputClone.focus()
 	// console.log(inputForm)
 	// console.log(inputClone)
-	
-	inputClone.addEventListener('keypress', bonusy = function(event) {
+
+	inputClone.addEventListener('keyup', bonusy = function(event) {
+		
+		// showPopup(randomNum);
+		
 		if (event.which === 13) {
 		
 		var num = inputClone.value;
 		num = parseInt(num);
+		
 		console.log('the value input is ' + num); // just to check
-			
-			if (randomNum === num) {
-				win();
-			} else {
-				lose(randomNum);
-			}
+		
 
-		}
+			if (randomNum === num) {
+				inputClone.removeEventListener('keyup', bonusy);
+				win();
+			} else if (randomNum !== num) {
+				lose(randomNum)
+				// showPopup(randomNum); // not working!!!
+				// alert('The correct answer is ' + randomNum)
+				inputClone.removeEventListener('keyup', bonusy);
+				
+			}
+		
+		} 
 	});
+
+	
 
 	inputClone.addEventListener('blur', function() {
 		inputClone.value = ''
@@ -263,16 +274,18 @@ function l2() {
 	// console.log(inputForm)
 	// console.log(inputClone)
 	
-	inputClone.addEventListener('keypress', bonusy = function(event) {
+	inputClone.addEventListener('keyup', bonusy = function(event) {
 		if (event.which === 13) {
 		
 		var val = inputClone.value.toUpperCase();
 		console.log('the value input is ' + val); // just to check
 
 			if (choosenItem === val) {
+				inputClone.removeEventListener('keyup', bonusy);
 				win();
-			} else {
+			} else if (choosenItem !== val) {
 				lose(choosenItem);
+				inputClone.removeEventListener('keyup', bonusy);
 			}
 
 		}
@@ -304,19 +317,26 @@ function l3() {
 		console.log(randomNum);
 
 		if (randomNum > 3){
+			button.removeEventListener('click', bonusy);
 			win();
-		} else {
+			
+		} else if (randomNum <= 3){
+			var randomNum = '4 and more';
+			button.removeEventListener('click', bonusy);
 			lose(randomNum);
 		}
-		document.querySelector('.input-form').removeChild(button);
+		
 		// So that can remove again
-		document.querySelector('.input-form').appendChild(inputForm);
+		if (questions.length !== 0) {
+			document.querySelector('.input-form').removeChild(button);
+			document.querySelector('.input-form').appendChild(inputForm);
+		}
 	});
 }
 ,
 function l4() {
 
-	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 3 seconds!<br>\"E N V I R O N M E N T A L I S M\"';
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 5 seconds!<br>\"E N V I R O N M E N T A L I S M\"';
 	var checkWord = "environmentalism"
 
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
@@ -335,9 +355,9 @@ function l4() {
 	var funct = function() {lose(checkWord)};
 
 	inputClone.addEventListener('click', function() {
-		var threeSecTimeout = setTimeout(funct, 3000)
+		var fiveSecTimeout = setTimeout(funct, 5000)
 
-		inputClone.addEventListener('keypress', bonusy = function(event) {
+		inputClone.addEventListener('keyup', bonusy = function(event) {
 			if (event.which === 13) {
 
 			clearTimeout(fiveSecTimeout);
@@ -346,9 +366,12 @@ function l4() {
 			console.log('the value input is ' + val); // just to check
 
 				if (checkWord === val) {
+					inputClone.removeEventListener('keyup', bonusy);
 					win();
-				} else {
+				} else if (checkWord !== val) {
 					lose(checkWord);
+					inputClone.removeEventListener('keyup', bonusy);
+					
 				}
 			}
 		});
@@ -361,7 +384,7 @@ function l4() {
 ,
 function l5() {
 
-	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 3 seconds!<br>\"S U S T A I N A B I L I T Y\"';
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 5 seconds!<br>\"S U S T A I N A B I L I T Y\"';
 	var checkWord = "sustainability"
 
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
@@ -380,9 +403,9 @@ function l5() {
 	var funct = function() {lose(checkWord)};
 
 	inputClone.addEventListener('click', function() {
-		var threeSecTimeout = setTimeout(funct, 3000)
+		var fiveSecTimeout = setTimeout(funct, 5000)
 
-		inputClone.addEventListener('keypress', bonusy = function(event) {
+		inputClone.addEventListener('keyup', bonusy = function(event) {
 			if (event.which === 13) {
 
 			clearTimeout(fiveSecTimeout);
@@ -391,9 +414,12 @@ function l5() {
 			console.log('the value input is ' + val); // just to check
 
 				if (checkWord === val) {
+					inputClone.removeEventListener('keyup', bonusy);
 					win();
-				} else {
+				} else if (checkWord !== val) {
 					lose(checkWord);
+					inputClone.removeEventListener('keyup', bonusy);
+					
 				}
 			}
 		});
@@ -402,6 +428,7 @@ function l5() {
 	inputClone.addEventListener('blur', function() {
 		inputClone.value = ''
 	});
+
 }
 
 ];

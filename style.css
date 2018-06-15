@@ -12,6 +12,44 @@ div {
     cursor:default;
 }
 
+
+
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px 30px;
+    border: 1px solid #888;
+    color: #555;
+    width: 30%;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+#ans {
+	color: red;
+}
+
+#note {
+	font-size: 13px;
+}
+
+
+
+
+
+
 #instructions {
 	position: absolute;
 	top: 160px;
@@ -202,5 +240,16 @@ b {
 	padding: 10px 30px;
 	margin: 10px 30px;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
