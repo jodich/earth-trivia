@@ -113,8 +113,8 @@ var questions = [
 {
 	question: "About how long does it take a Styrofoam cup to decompose?",
 	choices: [
+		"2 years",
 		"10 years",
-		"2 months",
 		"150 years",
 		"400 years"
 	],
@@ -161,7 +161,7 @@ var questions = [
 	answer: "China"
 },
 {
-	question: "What is the number one cause of worldwide tropical deforestation worldwide",
+	question: "What is the number one cause of worldwide tropical deforestation worldwide?",
 	choices: [
 		"Commercial logging",
 		"Wildfire",
@@ -171,14 +171,14 @@ var questions = [
 	answer: "Clearing of lands for agricultural use"
 },
 {
-	question: "What is the number one cause of worldwide tropical deforestation worldwide",
+	question: "What is visible air pollution called?",
 	choices: [
-		"Commercial logging",
-		"Wildfire",
-		"Building of roads and cities",
-		"Clearing of lands for agricultural use"
+		"Chemvis Pollution",
+		"Photochemical Smog",
+		"Rainbow Pollution",
+		"Smoglight"
 	],
-	answer: "Clearing of lands for agricultural use"
+	answer: "Photochemical Smog"
 },
 {
 	question: "The main gases responsible for the Greenhouse Effect are:",
@@ -202,29 +202,31 @@ var questions = [
 }
 ]
 
+// 
 
 
-var l1 = function() {
+var bonusQuestions = [
+
+function l1() {
 	var randomNum = Math.floor(Math.random() * 3) + 1;
-	luckQns.textContent = 'Let\'s match. Choose a number from 1 to 3.';
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Are you feeling lucky?<br>Pick a number from 1 to 3, let\'s see if we match!';
 
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
 	var inputForm = document.querySelector('#form');
-
 	var inputClone = inputForm.cloneNode(true);
 
-	document.querySelector('.input-form').removeChild(inputForm)
-
-	document.querySelector('.input-form').appendChild(inputClone)
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
 	inputClone.focus()
 	// console.log(inputForm)
 	// console.log(inputClone)
 	
-	inputClone.addEventListener('keypress', lucky = function(event) {
+	inputClone.addEventListener('keypress', bonusy = function(event) {
 		if (event.which === 13) {
 		
 		var num = inputClone.value;
 		num = parseInt(num);
+		console.log('the value input is ' + num); // just to check
 			
 			if (randomNum === num) {
 				win();
@@ -239,33 +241,38 @@ var l1 = function() {
 		inputClone.value = ''
 	});
 }
+,
 
-var l2 = function() {
-	var randomNum = Math.floor(Math.random() * 4) + 1;
-	luckQns.textContent = 'Let\'s match. Choose a number from 1 to 4.';
+function l2() {
+
+	var chooseFromThisArr = ["H", "T"];
+	var randomNum = Math.floor(Math.random() * chooseFromThisArr.length);
+	var choosenItem = chooseFromThisArr[randomNum];
+
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Are you feeling lucky?<br>Flip a coin, Heads(H) or Tails(T)?';
 
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
 	var inputForm = document.querySelector('#form');
-
 	var inputClone = inputForm.cloneNode(true);
-	document.querySelector('.input-form').removeChild(inputForm)
 
-	document.querySelector('.input-form').appendChild(inputClone)
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
+	inputClone.style.width = "100px"
 	inputClone.focus()
 
 	// console.log(inputForm)
 	// console.log(inputClone)
 	
-	inputClone.addEventListener('keypress', lucky = function(event) {
+	inputClone.addEventListener('keypress', bonusy = function(event) {
 		if (event.which === 13) {
 		
-		var num = inputClone.value;
-		num = parseInt(num);
-			
-			if (randomNum === num) {
+		var val = inputClone.value.toUpperCase();
+		console.log('the value input is ' + val); // just to check
+
+			if (choosenItem === val) {
 				win();
 			} else {
-				lose(randomNum);
+				lose(choosenItem);
 			}
 
 		}
@@ -275,14 +282,135 @@ var l2 = function() {
 		inputClone.value = ''
 	});
 }
+,
+function l3() {
 
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Are you feeling lucky?<br>Roll a die. If the number is bigger than 3, you win.';
 
-var luckQuestions = [];
+	// remove <input>
+	var inputForm = document.querySelector('#form');
 
-for (var i = 1; i < 3; i++) {
-	luckQuestionNum = 'l' + i;
-	luckQuestions.push(eval(luckQuestionNum));
+	document.querySelector('.input-form').removeChild(inputForm);
+
+	// create button
+	var button = document.createElement('div');
+	button.setAttribute("class", "button");
+	button.textContent = 'Roll Die';
+	document.querySelector('.input-form').appendChild(button);
+
+	// what does the button do?
+	button.addEventListener('click', bonusy = function(event) {
+		var randomNum = Math.floor((Math.random() * 6) + 1);
+		console.log(randomNum);
+
+		if (randomNum > 3){
+			win();
+		} else {
+			lose(randomNum);
+		}
+		document.querySelector('.input-form').removeChild(button);
+		// So that can remove again
+		document.querySelector('.input-form').appendChild(inputForm);
+	});
 }
+,
+function l4() {
+
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 3 seconds!<br>\"E N V I R O N M E N T A L I S M\"';
+	var checkWord = "environmentalism"
+
+	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
+	var inputForm = document.querySelector('#form');
+	var inputClone = inputForm.cloneNode(true);
+
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
+	inputClone.style.width = "250px"
+
+	// set timer; 10 seconds
+	// upon reaching timer, the 'lose' function will play
+	// if enter then check if word is same
+		// if word not the same then 'lose' function
+
+	var funct = function() {lose(checkWord)};
+
+	inputClone.addEventListener('click', function() {
+		var threeSecTimeout = setTimeout(funct, 3000)
+
+		inputClone.addEventListener('keypress', bonusy = function(event) {
+			if (event.which === 13) {
+
+			clearTimeout(fiveSecTimeout);
+			
+			var val = inputClone.value.toLowerCase();
+			console.log('the value input is ' + val); // just to check
+
+				if (checkWord === val) {
+					win();
+				} else {
+					lose(checkWord);
+				}
+			}
+		});
+	})
+
+	inputClone.addEventListener('blur', function() {
+		inputClone.value = ''
+	});
+}
+,
+function l5() {
+
+	bonusQns.innerHTML = '<b>Bonus Round!</b> Type this in 3 seconds!<br>\"S U S T A I N A B I L I T Y\"';
+	var checkWord = "sustainability"
+
+	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
+	var inputForm = document.querySelector('#form');
+	var inputClone = inputForm.cloneNode(true);
+
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
+	inputClone.style.width = "250px"
+
+	// set timer; 10 seconds
+	// upon reaching timer, the 'lose' function will play
+	// if enter then check if word is same
+		// if word not the same then 'lose' function
+
+	var funct = function() {lose(checkWord)};
+
+	inputClone.addEventListener('click', function() {
+		var threeSecTimeout = setTimeout(funct, 3000)
+
+		inputClone.addEventListener('keypress', bonusy = function(event) {
+			if (event.which === 13) {
+
+			clearTimeout(fiveSecTimeout);
+			
+			var val = inputClone.value.toLowerCase();
+			console.log('the value input is ' + val); // just to check
+
+				if (checkWord === val) {
+					win();
+				} else {
+					lose(checkWord);
+				}
+			}
+		});
+	})
+
+	inputClone.addEventListener('blur', function() {
+		inputClone.value = ''
+	});
+}
+
+];
+
+
+
+
+
+
 
 
 
@@ -291,4 +419,4 @@ for (var i = 1; i < 3; i++) {
 
 
 // console.log(questions.length)
-// console.log(luckQuestions.length)
+// console.log(bonusQuestions.length)

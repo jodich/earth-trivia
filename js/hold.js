@@ -34,10 +34,10 @@ play();
 
 
 
-luckQns.setAttribute("style", "display: none");
+bonusQns.setAttribute("style", "display: none");
 factQns.setAttribute("style", "display: visible");
 
-luckQns.setAttribute("style", "display: visible");
+bonusQns.setAttribute("style", "display: visible");
 factQns.setAttribute("style", "display: none");
 
 
@@ -181,7 +181,7 @@ h2 {
 	display: none;
 }
 
-#luck {
+#bonus {
 	display: none;
 }
 

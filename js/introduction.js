@@ -43,7 +43,7 @@ nameInput.addEventListener('keypress', function (event) {
 
 		if (name === ''){
 			name = 'You are';
-		} else if (name.length > 20) {
+		} else if (name.length > 30) {
 			name = name[0] + name[1] + name[2] + name[3] + name[4] + name[5] + name[6] + name[7] + ' is';
 		} else {
 			name = name + ' is';

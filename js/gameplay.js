@@ -1,8 +1,8 @@
 var factBox = document.querySelector('#factual');
-var luckBox = document.querySelector('#feeling-lucky');
+var bonusBox = document.querySelector('#bonus-round');
 
 var factQns = document.querySelector('#fact');
-var luckQns = document.querySelector('#luck');
+var bonusQns = document.querySelector('#bonus');
 var allChoices = document.querySelectorAll('.choices'); // returns an arrary
 var choice1Box = document.querySelector('#choice-one');
 var choice2Box = document.querySelector('#choice-two');
@@ -61,14 +61,15 @@ var generateQnsLoop = function() {
 	count++
 	
 	if (count % 5 === 0) {
-		luckQn();
+		bonusQn();
 	} else if (questions.length === 0){
 
+		// sets gameover when win
 		for (var i = 0; i < allChoices.length; i++) {
 			allChoices[i].removeEventListener('click', checkIfCorrect)
 		};
 
-		document.querySelector('#form').removeEventListener('keypress', lucky);
+		document.querySelector('#form').removeEventListener('keypress', bonusy);
 
 		setTimeout(function() { alert("WINNER"); }, 500);
 

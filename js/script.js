@@ -1,12 +1,12 @@
-var hideLuckQns = function() {
+var hidebonusQns = function() {
 
-	luckBox.setAttribute("style", "display: none");
+	bonusBox.setAttribute("style", "display: none");
 	factBox.setAttribute("style", "display: visible");
 }
 
 var hideFactQns = function() {
 
-	luckBox.setAttribute("style", "display: visible");
+	bonusBox.setAttribute("style", "display: visible");
 	factBox.setAttribute("style", "display: none");
 }
 
@@ -15,7 +15,7 @@ var earthMood = function() {
 	if (affected === 1175) {
 		earthStats.innerHTML = 'Earth\'s Mood:<br> Crushed';
 	} else if (affected >= 950) {
-		earthStats.innerHTML = 'Earth\'s Mood:<br> Frustrated';
+		earthStats.innerHTML = 'Earth\'s Mood:<br> Devastated';
 	} else if (affected >= 800) {
 		earthStats.innerHTML = 'Earth\'s Mood:<br> Gloomy';
 	} else if (affected >= 550) {
@@ -30,6 +30,21 @@ var earthMood = function() {
 		earthStats.innerHTML = 'Earth\'s Mood:<br> WTF';
 	}
 
+}
+
+
+
+
+var cloneInputTag = function(inputClone){
+	var inputForm = document.querySelector('#form');
+
+	inputClone = inputForm.cloneNode(true);
+	document.querySelector('.input-form').removeChild(inputForm)
+
+	document.querySelector('.input-form').appendChild(inputClone)
+	inputClone.focus()
+
+	return inputClone
 }
 
 
@@ -63,6 +78,7 @@ var lose = function(answer) {
 
 
 	// when lose liao, ends the qns
+	// sets gameover when lose
 	} else if (affected >= 1175) {
 		affected = 1175;
 		generateNewMap();
@@ -76,7 +92,7 @@ var lose = function(answer) {
 			allChoices[i].removeEventListener('click', checkIfCorrect)
 		}
 
-		document.querySelector('#form').removeEventListener('keypress', lucky);
+		document.querySelector('#form').removeEventListener('keypress', bonusy);
 	}
 }
 
@@ -105,7 +121,7 @@ var checkIfCorrect = function(event){
 var factQn = function(e) {
 
 	// set style for Factual Questions first
-	hideLuckQns();
+	hidebonusQns();
 	choice4Box.setAttribute("style", "display: inline-block");
 
 	// ---------- real thing starts here ------------
@@ -115,6 +131,9 @@ var factQn = function(e) {
 
 		// picks a random question
 		selectedQnObj = questions[pickQnRandomIndex];
+
+		// remove question from array of questions
+		questions.splice(pickQnRandomIndex, 1);
 
 		factQns.textContent = selectedQnObj.question;
 		choice1Box.textContent = selectedQnObj.choices[0];
@@ -126,9 +145,6 @@ var factQn = function(e) {
 	} else if (questions.length === 0) {
 		generateNewMap();
 	}
-
-	// remove question from array of questions
-	questions.splice(pickQnRandomIndex, 1);
 
 	// if choice4Box is empty
 	if (choice4Box.textContent === "") {
@@ -143,25 +159,34 @@ var factQn = function(e) {
 
 
 
+// generate a bonus-based question
+var bonusQuestionsClone = bonusQuestions;
 
-// generate a luck-based question
-var luckQn = function() {
+var bonusQn = function() {
 
-	hideFactQns()
+	hideFactQns();
+	// bonusQuestionsClone[3]();
 
-	pickQnRandomIndex = Math.floor(Math.random() * luckQuestions.length);
+	// duplicate bonusQuestions array
+	// empty bonusQuestionsClone arr
+	// when empty bonusQuestionsClone then it will equals bonusQuestions
 
-	luckQuestions[pickQnRandomIndex]();		// EXECUTES THE FUNCTION
+	if (bonusQuestionsClone.length !== 0) {
+		// picks a random number
+		pickbonusQnRandomIndex = Math.floor(Math.random() * bonusQuestionsClone.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
 
-	luckQuestions.splice(pickQnRandomIndex, 1);
+		// execute function
+		bonusQuestionsClone[pickbonusQnRandomIndex]();
 
-	if (luckQuestions.length === 0) {
-		for (var i = 1; i < 3; i++) {      // NEED TO UPDATE THIS WITH NEW LENGTH OF LUCK QNS
-			luckQuestionNum = 'l' + i;
-			luckQuestions.push(eval(luckQuestionNum));
-		}
-	}
-}
+		// remove question from array of questions
+		bonusQuestionsClone.splice(pickbonusQnRandomIndex, 1);
+
+
+	} else if (bonusQuestions.length === 0) {
+		bonusQuestionsClone = bonusQuestions;
+	};
+
+};
 
 
 
