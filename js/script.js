@@ -2,22 +2,6 @@ var setAffectedCountColor = function () {
 	document.querySelector('#affectedCount').style.color = "#24439E";
 }
 
-var setEarthMoodColor = function () {
-	// if ever want to assign color to individual mood, etc;
-	if (document.querySelector('#earthMood')) {
-
-		document.querySelector('#earthMood').style.color = "#24439E";
-
-	} else if (document.querySelector('#earthMoodSerious')) {
-
-		document.querySelector('#earthMoodSerious').style.color = "#24439E";
-
-	} else if (document.querySelector('#earthMoodVerySerious')) {
-
-		document.querySelector('#earthMoodVerySerious').style.color = "#24439E";
-	}
-}
-
 var hidebonusQns = function() {
 
 	bonusBox.setAttribute("style", "display: none");
@@ -33,24 +17,23 @@ var hideFactQns = function() {
 var earthMood = function() {
 
 	if (affected === 1175) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodVerySerious">Crushed</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Crushed</span>';
 	} else if (affected >= 950) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodVerySerious">Devastated</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Devastated</span>';
 	} else if (affected >= 800) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Upset</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Upset</span>';
 	} else if (affected >= 550) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Distressed</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Distressed</span>';
 	} else if (affected >= 300) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Pessimistic</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Pessimistic</span>';
 	} else if (affected >= 100) {
-		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMoodSerious">Anxious</span>';
+		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Anxious</span>';
 	} else if (affected >= 0) {
 		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">Hopeful</span>';
 	} else {
 		earthStats.innerHTML = 'Earth\'s Mood :<br><span id="earthMood">WTF</span>';
 	}
 
-	setEarthMoodColor();
 }
 
 
@@ -80,42 +63,38 @@ var win = function(a) {
 		return a
 	}
 
-	c.clearRect(0, 0, 800, 430);
-
 	// generate random count for affected
 	var randomAffected = Math.floor((Math.random() * 50));		// range: 0 to 50
 	affected -= randomAffected;
 
 	if (affected > 0) {
+		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 		generateQnsLoop();
 	} else if (affected < 0) {
 		affected = 0;
+		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 		generateQnsLoop();
 	}
 }
 
-
-
-
 var lose = function(answer) {
-	
+
 	showPopup(answer);
 
 	console.log('The correct answer is ' + answer);
-
-	c.clearRect(0, 0, 800, 430);
-
+	// showPopup(answer);
 	// generate random count for affected
 	var randomAffected = Math.floor((Math.random() * 100) + 50)		// range: 50 to 150
 	affected += randomAffected;
-
+	 // has updatescore and generate qns inside
 
 	// default; continues the qns
 	if (affected < 1175) {
+		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 		generateQnsLoop();
@@ -125,22 +104,52 @@ var lose = function(answer) {
 	// sets gameover when lose
 	} else if (affected >= 1175) {
 		affected = 1175;
+		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		earthMood();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 		setAffectedCountColor();
 
-		setTimeout(function() { alert("LOSER"); }, 500)
-
-		// remove all the eventlisteners when game over
-		for (var i = 0; i < allChoices.length; i++) {
-			allChoices[i].removeEventListener('click', checkIfCorrect)
-		}
+		// execute END GAME END GAME END GAME!!!!!!
+		var endGameStatus = 'LOST';
+		var affectedLog = remain;
+		var mood = document.getElementById('earthMood').textContent;
+		showPopEndGame(endGameStatus, affectedLog, mood);
 
 		document.querySelector('#form').removeEventListener('keypress', bonusy);
 	}
 }
 
+
+// var updateLoseScore = function() {
+// 	// default; continues the qns
+// 	if (affected < 1175) {
+// 		c.clearRect(0, 0, 800, 430);
+// 		generateNewMap();
+// 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+// 		
+
+
+// 	// when lose liao, ends the qns
+// 	// sets gameover when lose
+// 	} else if (affected >= 1175) {
+// 		affected = 1175;
+// 		c.clearRect(0, 0, 800, 430);
+// 		generateNewMap();
+// 		earthMood();
+// 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
+// 		setAffectedCountColor();
+
+// 		setTimeout(function() { alert("LOSER"); }, 500)
+
+// 		// remove all the eventlisteners when game over
+// 		for (var i = 0; i < allChoices.length; i++) {
+// 			allChoices[i].removeEventListener('click', checkIfCorrect)
+// 		}
+
+// 		document.querySelector('#form').removeEventListener('keypress', bonusy);
+// 	}
+// }
 
 
 
@@ -210,7 +219,7 @@ var bonusQuestionsClone = bonusQuestions;
 var bonusQn = function() {
 
 	hideFactQns();
-	// bonusQuestionsClone[2]();
+	// bonusQuestionsClone[0]();
 
 	// duplicate bonusQuestions array
 	// empty bonusQuestionsClone arr

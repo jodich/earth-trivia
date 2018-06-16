@@ -52,7 +52,7 @@ var startGame = function(name) {
 	generateNewMap();
 
 	// GENERATE questions loop
-	generateQnsLoop();    // need to replace this with generateQnsLoop
+	generateQnsLoop();
 
 }
 
@@ -68,11 +68,11 @@ var generateQnsLoop = function() {
 	} else if (questions.length === 0){
 
 		// sets gameover when win
-		for (var i = 0; i < allChoices.length; i++) {
-			allChoices[i].removeEventListener('click', checkIfCorrect)
-		};
+		var endGameStatus = 'WON';
+		var affectedLog = remain;
+		var mood = document.getElementById('earthMood').textContent;
+		showPopEndGame(endGameStatus, affectedLog, mood);
 
-		setTimeout(function() { alert("WINNER"); }, 500);
 
 	} else {
 		factQn();

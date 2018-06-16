@@ -25,25 +25,52 @@
 	// and continues with next question
 
 
+	// pop up is to indicate during end game
+	// runs when no more questions or the map is full of reds
+	// textContent the status; Winner or Loser
+	// press Enter to reload page and hence reset game
+
+
 
 var popup = document.querySelectorAll('.popup')[0];  // the whole pop which is width 100% and height 100%, has a low opacity background etc
-var wrongAnsPopup = document.querySelector('#answer-wrong');
-var wrongAnsContent = document.querySelector('#answer-wrong-content');
-
-
+var popupBox = document.querySelector('#answer-wrong');
+var popupContent = document.querySelector('#answer-wrong-content');
 
 var showPopup = function(answer) {
 
-	wrongAnsContent.innerHTML = 'The correct answer is \" <span id="ans">' + answer + '</span> \".<br><span id="note">Press Enter or Click anywhere to close</span>';
+	popupContent.innerHTML = 'The correct answer is \" <span id="ans">' + answer + '</span> \".<br><span id="note">Press Enter or Click anywhere to close</span>';
 
-	wrongAnsPopup.style.display = "block";
+	popupBox.style.display = "block";
 
-	document.addEventListener('keypress', function(event) {
+	document.addEventListener('keydown', function(event) {
 		if (event.which === 13) {
-			wrongAnsPopup.style.display = "none";
+			popupBox.style.display = "none";
 		}
 	})
 	popup.addEventListener('click', function() {
-		wrongAnsPopup.style.display = "none";
+		popupBox.style.display = "none";
 	})
 };
+
+
+var showPopEndGame = function(endGameStatus, affectedLog, mood) {
+
+	// remove eventListener for choices
+	for (var i = 0; i < allChoices.length; i++) {
+		allChoices[i].removeEventListener('click', checkIfCorrect)
+	}
+
+	popupContent.innerHTML = '<center> YOU ' + endGameStatus + '!<br><br>Your score is : ' + affectedLog + '.<br>Earth is feeling <i>' + mood + '</i>.</center>';
+
+	popupBox.style.display = "block";
+
+}
+
+
+
+
+
+
+
+
+

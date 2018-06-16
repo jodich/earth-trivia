@@ -235,11 +235,12 @@ function l1() {
 			if (randomNum === num) {
 				inputClone.removeEventListener('keyup', bonusy);
 				win();
-			} else if (randomNum !== num) {
+			} else {
+				inputClone.removeEventListener('keyup', bonusy);
 				lose(randomNum)
 				// showPopup(randomNum); // not working!!!
 				// alert('The correct answer is ' + randomNum)
-				inputClone.removeEventListener('keyup', bonusy);
+				
 				
 			}
 		
@@ -283,9 +284,9 @@ function l2() {
 			if (choosenItem === val) {
 				inputClone.removeEventListener('keyup', bonusy);
 				win();
-			} else if (choosenItem !== val) {
-				lose(choosenItem);
+			} else {
 				inputClone.removeEventListener('keyup', bonusy);
+				lose(choosenItem);
 			}
 
 		}
@@ -320,7 +321,7 @@ function l3() {
 			button.removeEventListener('click', bonusy);
 			win();
 			
-		} else if (randomNum <= 3){
+		} else {
 			var randomNum = '4 and more';
 			button.removeEventListener('click', bonusy);
 			lose(randomNum);
@@ -368,9 +369,9 @@ function l4() {
 				if (checkWord === val) {
 					inputClone.removeEventListener('keyup', bonusy);
 					win();
-				} else if (checkWord !== val) {
-					lose(checkWord);
+				} else {
 					inputClone.removeEventListener('keyup', bonusy);
+					lose(checkWord);
 					
 				}
 			}
@@ -416,10 +417,9 @@ function l5() {
 				if (checkWord === val) {
 					inputClone.removeEventListener('keyup', bonusy);
 					win();
-				} else if (checkWord !== val) {
-					lose(checkWord);
+				} else {
 					inputClone.removeEventListener('keyup', bonusy);
-					
+					lose(checkWord);
 				}
 			}
 		});
