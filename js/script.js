@@ -140,7 +140,7 @@ var factQn = function(e) {
 		choice3Box.textContent = selectedQnObj.choices[2];
 		choice4Box.textContent = selectedQnObj.choices[3];
 
-
+	// no more questions!!
 	} else if (questions.length === 0) {
 		generateNewMap();
 	}
@@ -158,37 +158,38 @@ var factQn = function(e) {
 
 // generate a bonus question ---------------------------------
 var bonusQuestionsClone = bonusQuestions;
-
 var bonusQn = function() {
 
-	// document.removeEventListener('keydown', functEnter);
+	// so that eventlistener does not stack when click
 	popup.removeEventListener('click', afterClickPopup);
 
+	// set style for bonus qn
 	hideFactQns();
-	bonusQuestionsClone[3]();
 
 	// duplicate bonusQuestions array
 	// empty bonusQuestionsClone arr
 	// when empty bonusQuestionsClone then it will equals bonusQuestions
 
-	// if (bonusQuestionsClone.length !== 0) {
-	// 	// picks a random number
-	// 	pickbonusQnRandomIndex = Math.floor(Math.random() * bonusQuestionsClone.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
+	// bonusQuestionsClone[3]();	// !! FOR TEST RUN !!
 
-	// 	// execute function
-	// 	bonusQuestionsClone[pickbonusQnRandomIndex]();
+	if (bonusQuestionsClone.length !== 0) {
+		// picks a random number
+		pickbonusQnRandomIndex = Math.floor(Math.random() * bonusQuestionsClone.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
 
-	// 	// remove question from array of questions
-	// 	bonusQuestionsClone.splice(pickbonusQnRandomIndex, 1);
+		// execute function
+		bonusQuestionsClone[pickbonusQnRandomIndex]();
+
+		// remove question from array of questions
+		bonusQuestionsClone.splice(pickbonusQnRandomIndex, 1);
 
 
-	// } else if (bonusQuestions.length === 0) {
-	// 	bonusQuestionsClone = bonusQuestions;
-	// };
+	} else if (bonusQuestions.length === 0) {
+		bonusQuestionsClone = bonusQuestions;
+	};
 
 };
 
-// create a new input form so that the value does not stack! -----------------------
+// create a new input form so that the value does not stack! For bonus questions -----------------------
 var inputForm;
 var inputClone;
 

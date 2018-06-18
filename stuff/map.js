@@ -1051,15 +1051,6 @@ function generateNewMap() {
 		}
 		makeRow42()
 
-		function makeRow43() {
-			x = 210;
-			y = 430;
-			for (var i = 0; i < 5; i++) {
-				makeCircle(x, y);
-				x += 10;
-			}
-		}
-		makeRow42()
 	}
 	makeMap()
 }

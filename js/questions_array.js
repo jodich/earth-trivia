@@ -397,7 +397,6 @@ function l5() {
 
 	inputClone.addEventListener('click', function() {
 		var fiveSecTimeout = setTimeout(funct, 5000);
-		return fiveSecTimeout;
 
 		inputClone.addEventListener('keyup', bonusy = function(event) {
 			if (event.which === 13) {

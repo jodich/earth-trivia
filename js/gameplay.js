@@ -1,3 +1,4 @@
+// selectors for gameplay
 var factBox = document.querySelector('#factual');
 var bonusBox = document.querySelector('#bonus-round');
 

@@ -1,8 +1,9 @@
+// selectors of popup box
 var popup = document.querySelectorAll('.popup')[0];  // the whole pop which is width 100% and height 100%, has a low opacity background etc
 var popupBox = document.querySelector('#answer-wrong'); // same shit as the one above
 var popupContent = document.querySelector('#answer-wrong-content');
 
-
+// global variables
 var endGameStatus;
 var affectedLog;
 var mood;
@@ -92,7 +93,4 @@ var createResetButton = function(gameEndClone) {
 		})
 
 }
-
-
-
 
