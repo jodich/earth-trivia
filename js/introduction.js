@@ -25,8 +25,8 @@ gameStats.setAttribute("style", "display: none");
 // set up items for intro page
 quote.innerHTML = 'Ignorance is the bane of our existence';
 byWho.innerHTML = '- Adipo Sidang';
-instruct.innerHTML = 'For each question answered wrongly, the ‘Affected Area’, represented by the red dots, increases. As the red dots increases, it mirrors the danger you are placing Earth in each time you are ignorant about matters concerning the environment.\
-<br><br>Can you complete the trivia without fully polluting the Earth with red dots due to your ignorance?' ;
+instruct.innerHTML = 'For each question answered wrongly, the ‘Affected Area’, represented by red dots will increase. As the red dots increases, it mirrors the danger you are placing Earth in each time you are ignorant about matters concerning the environment.\
+<br><br>Are you able to complete the trivia without fully polluting the Earth with red dots? Let\'s get started!' ;
 nameQn.textContent = 'What is your name?';
 
 // introPage.setAttribute("style", "display: none");

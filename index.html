@@ -8,7 +8,7 @@
 </head>
 <body>
 
-
+	<!-- Introduction, instructions, ask for name -->
 	<div id="instructions">
 		<div class="intro">
 			<div class="quote"></div>
@@ -19,35 +19,32 @@
 	  	<div class="input-name"><input type="name" id="name-form" name="input" value="" autofocus></div>
 	</div>
 
-
-
-
+	<!-- Pop up! -->
 	<div class="popup" id="answer-wrong">
 	  <div class="popup-content" id="answer-wrong-content">
 	  </div>
 	</div>
 
-
-
-
-
+	<!-- game stats -->
 	<div class="game-info">
 		<div id="earth-stats"><h5></h5></div>
 		<div id="title"><h5>save-the-world trivia</h5></div>
 		<div id="affected-count"><h5></h5></div>
 	</div>
 
-
+	<!-- main -->
 	<div id="map">
-
+		<!-- map -->
 		<canvas></canvas>
+		<!-- question -->
 		<div class="reset-this">
-
+			<!-- bonus questions -->
 			<div id="bonus-round">
 				<div class="questions" id="bonus"></div>
 	  			<div class="input-form"><input type="text" id="form" name="input"></div>
 	  		</div>
-
+			
+			<!-- questions -->
 			<div id="factual">
 				<div class="questions" id="fact"></div>
 				<div class="choices-row">

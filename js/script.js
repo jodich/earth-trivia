@@ -1,7 +1,3 @@
-var setAffectedCountColor = function () {
-	document.querySelector('#affectedCount').style.color = "#24439E";
-}
-
 var hidebonusQns = function() {
 
 	bonusBox.setAttribute("style", "display: none");
@@ -14,6 +10,7 @@ var hideFactQns = function() {
 	factBox.setAttribute("style", "display: none");
 }
 
+// updates Earth's mood -------------------------------------
 var earthMood = function() {
 
 	if (affected === 1175) {
@@ -36,31 +33,15 @@ var earthMood = function() {
 
 }
 
+// what happens when click right answer -----------------------------------------
+var win = function(answer) {
 
-
-
-var cloneInputTag = function(inputClone){
-	var inputForm = document.querySelector('#form');
-
-	inputClone = inputForm.cloneNode(true);
-	document.querySelector('.input-form').removeChild(inputForm)
-
-	document.querySelector('.input-form').appendChild(inputClone)
-	inputClone.focus()
-
-	return inputClone
-}
-
-
-
-
-var win = function(a) {
 	console.log('right')
 
 	if (affected === 0) {
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
 		generateQnsLoop();
-		return a
+		return answer
 	}
 
 	// generate random count for affected
@@ -81,79 +62,41 @@ var win = function(a) {
 	}
 }
 
+// what happens when click wrong answer ----------------------------------
 var lose = function(answer) {
 
-	showPopup(answer);
-
-	console.log('The correct answer is ' + answer);
-	// showPopup(answer);
 	// generate random count for affected
 	var randomAffected = Math.floor((Math.random() * 100) + 50)		// range: 50 to 150
 	affected += randomAffected;
-	 // has updatescore and generate qns inside
+
+	// shows popup with correct answer
+	// upon click popup it will close by default
+	// then it will generate new question
+	// but if affected = 1175, then it add eventlistener, so that when click again, it will show endgame popup
+	showPopup(answer);
+	console.log('The correct answer is ' + answer);
 
 	// default; continues the qns
 	if (affected < 1175) {
 		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
-		generateQnsLoop();
 
 
 	// when lose liao, ends the qns
 	// sets gameover when lose
 	} else if (affected >= 1175) {
+		
+		// updates affected score and map
 		affected = 1175;
 		c.clearRect(0, 0, 800, 430);
 		generateNewMap();
 		earthMood();
 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
-		setAffectedCountColor();
-
-		// execute END GAME END GAME END GAME!!!!!!
-		var endGameStatus = 'LOST';
-		var affectedLog = remain;
-		var mood = document.getElementById('earthMood').textContent;
-		showPopEndGame(endGameStatus, affectedLog, mood);
-
-		document.querySelector('#form').removeEventListener('keypress', bonusy);
 	}
 }
 
-
-// var updateLoseScore = function() {
-// 	// default; continues the qns
-// 	if (affected < 1175) {
-// 		c.clearRect(0, 0, 800, 430);
-// 		generateNewMap();
-// 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
-// 		
-
-
-// 	// when lose liao, ends the qns
-// 	// sets gameover when lose
-// 	} else if (affected >= 1175) {
-// 		affected = 1175;
-// 		c.clearRect(0, 0, 800, 430);
-// 		generateNewMap();
-// 		earthMood();
-// 		affectedCount.innerHTML = 'Affected Area :<br>' + '<span id="affectedCount">' + affected + ' / 1175 </span>';
-// 		setAffectedCountColor();
-
-// 		setTimeout(function() { alert("LOSER"); }, 500)
-
-// 		// remove all the eventlisteners when game over
-// 		for (var i = 0; i < allChoices.length; i++) {
-// 			allChoices[i].removeEventListener('click', checkIfCorrect)
-// 		}
-
-// 		document.querySelector('#form').removeEventListener('keypress', bonusy);
-// 	}
-// }
-
-
-
-
+// check if the answer is right or wrong ----------------------------------
 var checkIfCorrect = function(event){
 
 	// check if selected box textContent is the same as answer
@@ -167,18 +110,14 @@ var checkIfCorrect = function(event){
 	}
 }
 
-
-
-
-
-// generate a factual question
+// generate a factual question -------------------------------------------
 var factQn = function(e) {
 
 	// set style for Factual Questions first
 	hidebonusQns();
 	choice4Box.setAttribute("style", "display: inline-block");
 
-	// ---------- real thing starts here ------------
+	// ---------- real thing starts here ---
 	if (questions.length !== 0) {
 		// picks a random number
 		pickQnRandomIndex = Math.floor(Math.random() * questions.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
@@ -211,15 +150,16 @@ var factQn = function(e) {
 	}
 }
 
-
-
-// generate a bonus-based question
+// generate a bonus question ---------------------------------
 var bonusQuestionsClone = bonusQuestions;
 
 var bonusQn = function() {
 
+	// document.removeEventListener('keydown', functEnter);
+	popup.removeEventListener('click', afterClickPopup);
+
 	hideFactQns();
-	// bonusQuestionsClone[0]();
+	// bonusQuestionsClone[4]();
 
 	// duplicate bonusQuestions array
 	// empty bonusQuestionsClone arr
@@ -242,36 +182,18 @@ var bonusQn = function() {
 
 };
 
+// create a new input form so that the value does not stack! -----------------------
+var inputForm;
+var inputClone;
 
+var createNewInput = function() {
 
+	inputForm = document.querySelector('#form');
+	inputClone = inputForm.cloneNode(true);
+	document.querySelector('.input-form').removeChild(inputForm);
+	document.querySelector('.input-form').appendChild(inputClone);
 
-var popUp = function() {
-	// pop up is to indicate when wrong
-	// runs when player 'lose'
-	// displays popup div
-	// the correct answer is ______
-	// press enter so that popup's display is none
-	// and continues with next question
 }
-
-
-
-var popUpEndGame = function(status) {
-	// pop up is to indicate during end game
-	// runs when no more questions or the map is full of reds
-	// textContent the status; Winner or Loser
-	// press Enter to reload page and hence reset game
-}
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -37,19 +37,25 @@ div {
     line-height: 30px;
 }
 
+#reset {
+	margin: 30px auto 0 auto;
+	padding: 3px 0 2px 0;
+	width: 150px;
+	font-size: 14px;
+	border: 1px solid red;
+}
+
 #ans {
 	color: red;
 }
 
 #note {
-	font-size: 13px;
+	font-size: 12px;
 }
 
 #earthMood {
 	color: #24439E;
 }
-
-
 
 
 #instructions {
@@ -152,6 +158,11 @@ canvas {
 			text-align: right;
 			float: right;
 		}
+		
+		/*just the number*/
+		#affectedCount {
+			color: #24439E;
+		}
 
 .reset-this {
 	margin: 0 auto;
@@ -236,11 +247,12 @@ b {
 	color: #555555;
 }
 
-.button {
+.roll-die {
 	border: 2px solid red;
 	display: inline-block;
 	padding: 10px 30px;
 	margin: 10px 30px;
+	width: 120px;
 }
 
 

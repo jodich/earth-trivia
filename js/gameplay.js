@@ -56,26 +56,19 @@ var startGame = function(name) {
 
 }
 
+var count = 0
+
 var generateQnsLoop = function() {
 
 	earthMood();
-	setAffectedCountColor();
 
-	count++
+	count = count + 1
 	
 	if (count % 5 === 0) {
 		bonusQn();
 	} else if (questions.length === 0){
-
-		// sets gameover when win
-		var endGameStatus = 'WON';
-		var affectedLog = remain;
-		var mood = document.getElementById('earthMood').textContent;
-		showPopEndGame(endGameStatus, affectedLog, mood);
-
-
+		showPopEndGameWin();
 	} else {
 		factQn();
 	}
-	return count;
 }

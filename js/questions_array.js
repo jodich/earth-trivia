@@ -213,12 +213,13 @@ function l1() {
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
 	var inputForm = document.querySelector('#form');
 	var inputClone = inputForm.cloneNode(true);
-
 	document.querySelector('.input-form').removeChild(inputForm);
 	document.querySelector('.input-form').appendChild(inputClone);
+
+	//sets style for input
+	inputClone.style.display = "inline-block";
+	// inputClone.style.width = "100px";
 	inputClone.focus()
-	// console.log(inputForm)
-	// console.log(inputClone)
 
 	inputClone.addEventListener('keyup', bonusy = function(event) {
 		
@@ -238,9 +239,6 @@ function l1() {
 			} else {
 				inputClone.removeEventListener('keyup', bonusy);
 				lose(randomNum)
-				// showPopup(randomNum); // not working!!!
-				// alert('The correct answer is ' + randomNum)
-				
 				
 			}
 		
@@ -266,14 +264,13 @@ function l2() {
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
 	var inputForm = document.querySelector('#form');
 	var inputClone = inputForm.cloneNode(true);
-
 	document.querySelector('.input-form').removeChild(inputForm);
 	document.querySelector('.input-form').appendChild(inputClone);
-	inputClone.style.width = "100px"
-	inputClone.focus()
 
-	// console.log(inputForm)
-	// console.log(inputClone)
+	//sets style for input
+	inputClone.style.display = "inline-block";
+	inputClone.style.width = "100px";
+	inputClone.focus()
 	
 	inputClone.addEventListener('keyup', bonusy = function(event) {
 		if (event.which === 13) {
@@ -303,34 +300,34 @@ function l3() {
 
 	// remove <input>
 	var inputForm = document.querySelector('#form');
-
 	document.querySelector('.input-form').removeChild(inputForm);
 
-	// create button
-	var button = document.createElement('div');
-	button.setAttribute("class", "button");
-	button.textContent = 'Roll Die';
-	document.querySelector('.input-form').appendChild(button);
+	// create roll die button
+	var rollDie = document.createElement('div');
+	rollDie.setAttribute("class", "roll-die");
+	rollDie.textContent = 'Roll Die';
+	document.querySelector('.input-form').appendChild(rollDie);
 
 	// what does the button do?
-	button.addEventListener('click', bonusy = function(event) {
+	rollDie.addEventListener('click', bonusy = function(event) {
 		var randomNum = Math.floor((Math.random() * 6) + 1);
 		console.log(randomNum);
 
 		if (randomNum > 3){
-			button.removeEventListener('click', bonusy);
+			rollDie.removeEventListener('click', bonusy);
 			win();
 			
 		} else {
 			var randomNum = '4 and more';
-			button.removeEventListener('click', bonusy);
+			rollDie.removeEventListener('click', bonusy);
 			lose(randomNum);
 		}
 		
 		// So that can remove again
 		if (questions.length !== 0) {
-			document.querySelector('.input-form').removeChild(button);
-			document.querySelector('.input-form').appendChild(inputForm);
+			document.querySelector('.input-form').replaceChild(inputForm, rollDie);
+			inputForm.style.display = "none";
+			// inputForm.style.height = "43px";
 		}
 	});
 }
@@ -343,9 +340,11 @@ function l4() {
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
 	var inputForm = document.querySelector('#form');
 	var inputClone = inputForm.cloneNode(true);
-
 	document.querySelector('.input-form').removeChild(inputForm);
 	document.querySelector('.input-form').appendChild(inputClone);
+
+	//sets style for input
+	inputClone.style.display = "inline-block";
 	inputClone.style.width = "250px"
 
 	// set timer; 10 seconds
@@ -389,17 +388,11 @@ function l5() {
 	var checkWord = "sustainability"
 
 	// MAKE SURE THE INPUT ONLY RUNS ONCE, CLEARS STACKED VALUE!!
-	var inputForm = document.querySelector('#form');
-	var inputClone = inputForm.cloneNode(true);
+	createNewInput();
 
-	document.querySelector('.input-form').removeChild(inputForm);
-	document.querySelector('.input-form').appendChild(inputClone);
+	//sets style for input
+	inputClone.style.display = "inline-block";
 	inputClone.style.width = "250px"
-
-	// set timer; 10 seconds
-	// upon reaching timer, the 'lose' function will play
-	// if enter then check if word is same
-		// if word not the same then 'lose' function
 
 	var funct = function() {lose(checkWord)};
 
@@ -432,10 +425,6 @@ function l5() {
 }
 
 ];
-
-
-
-
 
 
 
