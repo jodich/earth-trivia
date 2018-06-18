@@ -285,7 +285,6 @@ function l2() {
 				inputClone.removeEventListener('keyup', bonusy);
 				lose(choosenItem);
 			}
-
 		}
 	});
 
@@ -351,12 +350,10 @@ function l4() {
 	// upon reaching timer, the 'lose' function will play
 	// if enter then check if word is same
 		// if word not the same then 'lose' function
-
-	var funct = function() {lose(checkWord)};
+	var funct = function() {lose(checkWord);};
 
 	inputClone.addEventListener('click', function() {
-		var fiveSecTimeout = setTimeout(funct, 5000)
-
+		
 		inputClone.addEventListener('keyup', bonusy = function(event) {
 			if (event.which === 13) {
 
@@ -374,7 +371,9 @@ function l4() {
 					
 				}
 			}
-		});
+		})
+		var fiveSecTimeout = setTimeout(funct, 5000);
+
 	})
 
 	inputClone.addEventListener('blur', function() {
@@ -397,7 +396,8 @@ function l5() {
 	var funct = function() {lose(checkWord)};
 
 	inputClone.addEventListener('click', function() {
-		var fiveSecTimeout = setTimeout(funct, 5000)
+		var fiveSecTimeout = setTimeout(funct, 5000);
+		return fiveSecTimeout;
 
 		inputClone.addEventListener('keyup', bonusy = function(event) {
 			if (event.which === 13) {

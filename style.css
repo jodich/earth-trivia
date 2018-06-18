@@ -48,7 +48,7 @@ div {
 #ans {
 	color: red;
 }
-
+ 
 #note {
 	font-size: 12px;
 }
@@ -218,6 +218,12 @@ canvas {
 					margin: 10px 30px;
 				}
 
+				/* need to change #roll-die button also for consistency */
+				.choices:hover {
+    				background-color: rgba(255, 0, 0, 0.1);
+    				color: black;
+				}
+
 		.input-box {
 			width: 100%;
 		}
@@ -253,6 +259,13 @@ b {
 	padding: 10px 30px;
 	margin: 10px 30px;
 	width: 120px;
+}
+
+
+
+.roll-die:hover, .choices:hover {
+	background-color: rgba(255, 0, 0, 0.1);
+    color: black;
 }
 
 

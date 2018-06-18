@@ -45,7 +45,7 @@ var win = function(answer) {
 	}
 
 	// generate random count for affected
-	var randomAffected = Math.floor((Math.random() * 50));		// range: 0 to 50
+	var randomAffected = Math.floor((Math.random() * 50) + 10);		// range: 10 to 60
 	affected -= randomAffected;
 
 	if (affected > 0) {
@@ -62,12 +62,18 @@ var win = function(answer) {
 	}
 }
 
+var bonusy;
 // what happens when click wrong answer ----------------------------------
 var lose = function(answer) {
 
 	// generate random count for affected
 	var randomAffected = Math.floor((Math.random() * 100) + 50)		// range: 50 to 150
 	affected += randomAffected;
+
+	// if there is a form, remove the eventListener to trigger stuff when you press enter
+	if (document.querySelector('#form')) {
+		document.querySelector('#form').removeEventListener('keyup', bonusy);
+	}
 
 	// shows popup with correct answer
 	// upon click popup it will close by default
@@ -159,26 +165,26 @@ var bonusQn = function() {
 	popup.removeEventListener('click', afterClickPopup);
 
 	hideFactQns();
-	// bonusQuestionsClone[4]();
+	bonusQuestionsClone[3]();
 
 	// duplicate bonusQuestions array
 	// empty bonusQuestionsClone arr
 	// when empty bonusQuestionsClone then it will equals bonusQuestions
 
-	if (bonusQuestionsClone.length !== 0) {
-		// picks a random number
-		pickbonusQnRandomIndex = Math.floor(Math.random() * bonusQuestionsClone.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
+	// if (bonusQuestionsClone.length !== 0) {
+	// 	// picks a random number
+	// 	pickbonusQnRandomIndex = Math.floor(Math.random() * bonusQuestionsClone.length); // length is 8 means the max number that can random until is 7. The max index for an array is 7 when length is 8
 
-		// execute function
-		bonusQuestionsClone[pickbonusQnRandomIndex]();
+	// 	// execute function
+	// 	bonusQuestionsClone[pickbonusQnRandomIndex]();
 
-		// remove question from array of questions
-		bonusQuestionsClone.splice(pickbonusQnRandomIndex, 1);
+	// 	// remove question from array of questions
+	// 	bonusQuestionsClone.splice(pickbonusQnRandomIndex, 1);
 
 
-	} else if (bonusQuestions.length === 0) {
-		bonusQuestionsClone = bonusQuestions;
-	};
+	// } else if (bonusQuestions.length === 0) {
+	// 	bonusQuestionsClone = bonusQuestions;
+	// };
 
 };
 
